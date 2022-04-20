@@ -1,6 +1,11 @@
 
 :root{
-    --miBackground: #f4f2f2;
+    --miBackground: rgb(243,249,252);
+    --verdeClaro: rgb(0,168,142);
+    --verdeOscuro: rgb(0,145,126);
+    --letraOscura: rgb(46, 57, 77);
+    --letraClara: rgb(152,173,173);
+    --miBlanco: rgb(235,255,235);   
   }
 
   /* :host {
@@ -13,15 +18,50 @@
   } */
 
 
-  body{
-      background: var(--miBackground);
-  }
 
-  li{
-    list-style: none;
-  }
+body{
+  background: var(--miBackground);
+  color: var(--letraOscura);
+}
 
-  a{
-      text-decoration: none;
-      color: black;
-  }
+.conteiner{
+  padding: 1%;
+  margin: auto;
+}
+
+.navbar{
+  background-color: var(--verdeClaro);
+  border-bottom: 1px solid var(--letraClara);
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+
+div .register{
+  background-color: var(--verdeClaro);
+  display: block;
+  align-items: center;
+  padding: 2%;
+  width: 50%;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 2rem;
+}
+
+.boton{
+  background-color: var(--verdeOscuro);
+  color: var(--miBlanco);
+  padding-top: .45rem;
+  padding-left: .7rem;
+  padding-right: .7rem;
+  border: none;
+}

@@ -1,1 +1,130 @@
-<p>register works!</p>
+<div class="conteiner">
+    
+    <div class="register">
+        <div class="text-center">
+            <h1 class=""> {{ page_title }} </h1>
+        </div>    
+        <h6 class="alert">{{ "* Datos necesarios" }}</h6>
+
+        <div class="alert alert-success col-md-12 mt-3" *ngIf="status == 'success'">
+            El registro se ha completado correctamente.  
+        </div>
+
+        <div class="alert alert-danger col-md-12 mt-3" *ngIf="status == 'error'">
+            El registro no se ha completado correctamente.
+        </div>
+        
+        <div class="col-md-12">
+            <form action="" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="empresa_id">Empresa id</label>
+                    <input formControlName="empresa_id" name="empresa_id" type="number" class="form-control" pattern="[0-9]+">
+                    <div *ngIf="registerForm.controls['empresa_id'].invalid && (registerForm.controls['empresa_id'].dirty || registerForm.controls['empresa_id'].touched)" class="alert alert-danger">
+                        Son solo permitidos caracteres numericos.
+                    </div> 
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="name">Nombre</label>
+                    <input formControlName="name" name="name" type="text" class="form-control" pattern="[a-zA-Z]+" required>
+                    <!-- <div *ngIf="registerForm.controls['name'].invalid && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)" class="alert alert-danger">
+                        El nombre es requerido
+                    </div>  -->
+                    <div *ngIf="registerForm.controls['name'].errors?.['required'] && registerForm.controls['name'].touched" class="alert alert-danger">
+                        El nombre es requerido.
+                    </div>  
+                    <div *ngIf="registerForm.controls['name'].invalid && (registerForm.controls['name'].touched)" class="alert alert-danger">
+                        Son solo permitidos caracteres alfabeticos.
+                    </div>              
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="secondname">Segundo Nombre</label>
+                    <input formControlName="secondname" name="secondname" type="text" class="form-control" pattern="[a-zA-Z]+">
+                    <div *ngIf="registerForm.controls['secondname'].invalid && (registerForm.controls['secondname'].dirty || registerForm.controls['secondname'].touched)" class="alert alert-danger">
+                        Son solo permitidos caracteres alfabeticos.
+                    </div>   
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="lastname">Apellido</label>
+                    <input formControlName="lastname" name="lastname" type="text" class="form-control" required pattern="[a-zA-Z]+">
+                    <div *ngIf="registerForm.controls['lastname'].errors?.['required'] && registerForm.controls['lastname'].touched" class="alert alert-danger">
+                        El apellido es requerido.
+                    </div> 
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="dni">DNI (Sin puntos ni guiones)</label>
+                    <input formControlName="dni" name="dni" type="text" class="form-control" required pattern="[0-9]+">
+                    <div *ngIf="registerForm.controls['dni'].errors?.['required'] && (registerForm.controls['dni'].touched)" class="alert alert-danger">
+                        El DNI es requerido.
+                    </div>
+                    <div *ngIf="registerForm.controls['dni'].invalid && (registerForm.controls['dni'].touched)" class="alert alert-danger">
+                        Son solo permitidos caracteres numericos.
+                    </div> 
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="cuil">CUIL</label>
+                    <input formControlName="cuil" name="cuil" type="text" class="form-control">
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="direccion">Direccion</label>
+                    <input formControlName="direccion" name="direccion" type="text" class="form-control">
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="telefono">Telefono</label>
+                    <input formControlName="telefono" name="telefono" type="text" class="form-control" pattern="[0-9]+">
+                    <div *ngIf="registerForm.controls['telefono'].invalid && (registerForm.controls['telefono'].touched)" class="alert alert-danger">
+                        Error en el número de telefono.
+                    </div> 
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email</label>
+                    <input formControlName="email" name="email" type="email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    <div *ngIf="registerForm.controls['email'].errors?.['required'] && (registerForm.controls['email'].touched)" class="alert alert-danger">
+                        El email es requerido.
+                    </div>
+                    <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].touched)" class="alert alert-danger">
+                        Caracteres Incorrectos.
+                    </div>
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="password">Contraseña</label>
+                    <input formControlName="password" name="password" type="password" class="form-control" required pattern=".{8,}">
+                    <div *ngIf="registerForm.controls['password'].errors?.['required'] && (registerForm.controls['password'].touched)" class="alert alert-danger">
+                        La contraseña es requerido.
+                    </div>
+                    <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].touched)" class="alert alert-danger">
+                        La contraseña debe contener mas de 8 caracteres
+                    </div>
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="password_confirmation">Repetir Contraseña</label>
+                    <input formControlName="password_confirmation" name="password_confirmation" type="password" class="form-control" required pattern=".{8,}">
+                    <div *ngIf="registerForm.controls['password_confirmation'].errors?.['required'] && (registerForm.controls['password_confirmation'].touched)" class="alert alert-danger">
+                        La confirmacion de contraseña es requerido.
+                    </div>
+                    <div *ngIf="(registerForm.controls['password_confirmation'].value != registerForm.controls['password'].value) && (registerForm.controls['password_confirmation'].touched)" class="alert alert-danger">
+                        Las contraseñas no coninciden.
+                    </div>
+                    <div *ngIf="registerForm.controls['password_confirmation'].invalid && (registerForm.controls['password_confirmation'].touched)" class="alert alert-danger">
+                        La contraseña debe contener mas de 8 caracteres
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" [disabled]="!registerForm.valid" class="btn boton">Registrar</button>            
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+

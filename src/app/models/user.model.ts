@@ -11,6 +11,7 @@ export class User {
         public  telefono: string,
         public  email: string,
         public  password: string, 
+        public  password_confirmation: string,
         public  created_at:     any,
         public  updated_at:     any   
     ){}
